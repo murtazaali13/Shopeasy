@@ -38,3 +38,38 @@ The initial project structure and documentation have been created and uploaded t
 - Track future development work through Git commits and GitHub.
 
 .
+## Day 2: Responsive Homepage and Product Browsing
+
+**Date:** 11 October 2026
+
+### Objective
+
+Build the first frontend version of the ShopEasy homepage.
+
+### Work Completed
+
+1. Created the homepage using HTML.
+2. Added responsive styling for desktop and mobile screens.
+3. Added sample products with category filters and search.
+4. Added a client-side cart count that updates when products are added.
+
+### Tools Used
+
+- Visual Studio Code
+- HTML
+- CSS
+- JavaScript
+- Git and GitHub
+
+### Outcome
+
+The static homepage displays sample products. Visitors can search and filter products, and the cart count increases when they click “Add to cart.”
+
+### Scope
+
+This is a frontend demonstration with sample products. A backend, user accounts, payment, and checkout have not been implemented.
+
+### Next Steps
+
+- Review the homepage and make any design changes.
+- Plan the next project feature.
