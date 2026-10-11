@@ -73,3 +73,10 @@ This is a frontend demonstration with sample products. A backend, user accounts,
 
 - Review the homepage and make any design changes.
 - Plan the next project feature.
+
+## Day 3: ShopEasy homepage redesign
+
+- Updated the homepage colors and styling to give it a brighter, more eye-catching look.
+- Improved the product card layout and spacing for desktop and smaller screens.
+- Kept the existing search, category filters, and add-to-cart counter.
+- The page uses sample products and runs in the browser. Backend, login, and checkout features are not implemented.

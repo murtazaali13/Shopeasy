@@ -3,246 +3,301 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Shop everyday favorites at ShopEasy.">
-  <title>ShopEasy | Everyday shopping</title>
+  <meta name="description" content="Discover everyday favorites at ShopEasy.">
+  <title>ShopEasy | Find your everyday favorite</title>
   <link rel="stylesheet" href="style.css">
   <script src="script.js" defer></script>
 </head>
 <body>
   <div class="announcement">
-    Free delivery on orders over ₹1,499
+    <p>Good things are on the way. Free delivery over ₹1,499.</p>
   </div>
 
   <header class="site-header">
     <div class="header-main">
       <a class="brand" href="#" aria-label="ShopEasy home">
-        <span class="brand-mark" aria-hidden="true">SE</span>
+        <span class="brand-mark" aria-hidden="true">S</span>
         <span>ShopEasy</span>
       </a>
 
-      <form class="search-form" role="search" onsubmit="return false">
+      <form class="search-box" id="search-form" role="search">
         <label class="visually-hidden" for="search-input">Search products</label>
-        <span class="search-icon" aria-hidden="true">⌕</span>
+        <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="10.8" cy="10.8" r="6.8"></circle>
+          <path d="m16 16 5 5"></path>
+        </svg>
         <input
           id="search-input"
           type="search"
-          placeholder="Search for products..."
+          placeholder="Search for something lovely..."
           autocomplete="off"
         >
       </form>
 
-      <button class="cart-button" type="button" aria-label="Shopping cart">
-        <span aria-hidden="true">Bag</span>
+      <button class="cart-button" id="open-cart" type="button" aria-label="Open shopping bag">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M5 8h14l1 13H4L5 8Z"></path>
+          <path d="M9 9V6a3 3 0 0 1 6 0v3"></path>
+        </svg>
+        <span class="cart-label">Bag</span>
         <span class="cart-count" id="cart-count" aria-live="polite">0</span>
       </button>
     </div>
 
     <nav class="main-nav" aria-label="Main navigation">
-      <a href="#products">Shop</a>
+      <a href="#products">Shop all</a>
       <a href="#categories">Categories</a>
-      <a href="#why-shopeasy">Why ShopEasy</a>
+      <a href="#why-shopeasy">Our promise</a>
     </nav>
   </header>
 
   <main>
     <section class="hero" aria-labelledby="hero-title">
       <div class="hero-copy">
-        <p class="eyebrow">A little something for every day</p>
-        <h1 id="hero-title">Good finds.<br><span>Great prices.</span></h1>
+        <p class="eyebrow"><span></span> The everyday edit</p>
+        <h1 id="hero-title">Find your<br>new <em>favorite.</em></h1>
         <p class="hero-description">
-          Meet your new favorites across tech, style, home, and more.
+          Thoughtful little finds for your home, your style, and everything in between.
         </p>
-        <a class="primary-button" href="#products">Explore the collection</a>
+        <a class="hero-button" href="#products">
+          Explore the collection
+          <span aria-hidden="true">↗</span>
+        </a>
+        <p class="hero-note">A little joy, delivered to your door.</p>
       </div>
 
-      <div class="hero-image-wrap">
+      <div class="hero-art">
+        <div class="hero-orbit" aria-hidden="true"></div>
         <img
-          class="hero-image"
           src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1200&q=85"
           alt="A bright clothing and lifestyle shop"
         >
-        <div class="hero-note">
-          <span class="hero-note-icon" aria-hidden="true">✦</span>
-          <span>Little joys,<br>delivered.</span>
+        <div class="hero-sticker">
+          <span class="sticker-star" aria-hidden="true">✦</span>
+          <span>GOOD FINDS<br>LIVE HERE</span>
+        </div>
+        <div class="hero-caption">
+          <span>THE SHOP EASY EDIT</span>
+          <strong>Little things. Lovely days.</strong>
         </div>
       </div>
     </section>
 
-    <section class="products-section" id="products" aria-labelledby="products-title">
-      <div class="section-heading">
+    <section class="catalog-section" id="products" aria-labelledby="products-title">
+      <div class="catalog-intro">
         <div>
-          <p class="eyebrow">The good stuff</p>
-          <h2 id="products-title">Popular picks</h2>
+          <p class="eyebrow">A few things we love</p>
+          <h2 id="products-title">Popular right now</h2>
         </div>
-        <p class="product-count" id="product-count">8 products</p>
+        <p class="result-count" id="result-count">8 products</p>
       </div>
 
-      <div class="filter-row" id="categories" aria-label="Filter products by category">
-        <button class="filter-btn active" type="button" data-filter="all" aria-pressed="true">All items</button>
-        <button class="filter-btn" type="button" data-filter="electronics" aria-pressed="false">Electronics</button>
-        <button class="filter-btn" type="button" data-filter="fashion" aria-pressed="false">Fashion</button>
-        <button class="filter-btn" type="button" data-filter="home" aria-pressed="false">Home</button>
-        <button class="filter-btn" type="button" data-filter="beauty" aria-pressed="false">Beauty</button>
+      <div class="catalog-controls">
+        <div class="filter-list" id="categories" aria-label="Filter products by category">
+          <button class="filter-button active" type="button" data-filter="all" aria-pressed="true">Everything</button>
+          <button class="filter-button" type="button" data-filter="electronics" aria-pressed="false">Tech</button>
+          <button class="filter-button" type="button" data-filter="fashion" aria-pressed="false">Style</button>
+          <button class="filter-button" type="button" data-filter="home" aria-pressed="false">Home</button>
+          <button class="filter-button" type="button" data-filter="beauty" aria-pressed="false">Beauty</button>
+        </div>
+
+        <label class="sort-control" for="sort-select">
+          <span>Sort</span>
+          <select id="sort-select">
+            <option value="featured">Featured</option>
+            <option value="price-low">Price: low to high</option>
+            <option value="price-high">Price: high to low</option>
+            <option value="name">Name: A to Z</option>
+          </select>
+        </label>
       </div>
 
       <div class="product-grid" id="product-grid">
-        <article class="product-card" data-category="electronics" data-name="wireless headphones" data-search="wireless headphones audio music">
+        <article class="product-card" data-id="headphones" data-category="electronics" data-name="wireless headphones" data-search="wireless headphones audio music over ear" data-price="2499">
           <div class="product-image-wrap">
             <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=85" alt="Black and orange wireless headphones" loading="lazy">
-            <span class="product-badge">Popular</span>
-          </div>
-          <div class="product-info">
-            <p class="product-category">Electronics</p>
-            <h3>Wireless Headphones</h3>
-            <div class="product-bottom">
-              <span class="price">₹2,499</span>
-              <span class="rating" aria-label="Rated 4.8 out of 5">★ 4.8</span>
-            </div>
-            <button class="add-button" type="button">Add to cart</button>
-          </div>
-        </article>
-
-        <article class="product-card" data-category="electronics" data-name="classic wristwatch" data-search="classic wristwatch watch accessories">
-          <div class="product-image-wrap">
-            <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=85" alt="Minimal wristwatch with a light face" loading="lazy">
             <span class="product-badge">Bestseller</span>
           </div>
           <div class="product-info">
-            <p class="product-category">Electronics</p>
-            <h3>Classic Wristwatch</h3>
-            <div class="product-bottom">
-              <span class="price">₹1,899</span>
-              <span class="rating" aria-label="Rated 4.7 out of 5">★ 4.7</span>
+            <p class="product-category">Tech</p>
+            <h3>Wireless Headphones</h3>
+            <div class="product-meta">
+              <span class="price">₹2,499</span>
+              <span class="rating" aria-label="Rated 4.8 out of 5">★ 4.8</span>
             </div>
-            <button class="add-button" type="button">Add to cart</button>
+            <button class="add-button" type="button">Add to bag <span aria-hidden="true">+</span></button>
           </div>
         </article>
 
-        <article class="product-card" data-category="fashion" data-name="everyday sneakers" data-search="everyday sneakers shoes footwear">
+        <article class="product-card" data-id="watch" data-category="electronics" data-name="classic wristwatch" data-search="classic wristwatch watch accessories time" data-price="1899">
+          <div class="product-image-wrap">
+            <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=85" alt="Minimal wristwatch with a light face" loading="lazy">
+            <span class="product-badge badge-soft">Everyday pick</span>
+          </div>
+          <div class="product-info">
+            <p class="product-category">Tech</p>
+            <h3>Classic Wristwatch</h3>
+            <div class="product-meta">
+              <span class="price">₹1,899</span>
+              <span class="rating" aria-label="Rated 4.7 out of 5">★ 4.7</span>
+            </div>
+            <button class="add-button" type="button">Add to bag <span aria-hidden="true">+</span></button>
+          </div>
+        </article>
+
+        <article class="product-card" data-id="sneakers" data-category="fashion" data-name="everyday sneakers" data-search="everyday sneakers shoes footwear red" data-price="2199">
           <div class="product-image-wrap">
             <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=800&q=85" alt="Red everyday sneaker" loading="lazy">
             <span class="product-badge">New</span>
           </div>
           <div class="product-info">
-            <p class="product-category">Fashion</p>
+            <p class="product-category">Style</p>
             <h3>Everyday Sneakers</h3>
-            <div class="product-bottom">
+            <div class="product-meta">
               <span class="price">₹2,199</span>
               <span class="rating" aria-label="Rated 4.6 out of 5">★ 4.6</span>
             </div>
-            <button class="add-button" type="button">Add to cart</button>
+            <button class="add-button" type="button">Add to bag <span aria-hidden="true">+</span></button>
           </div>
         </article>
 
-        <article class="product-card" data-category="fashion" data-name="weekend tote bag" data-search="weekend tote bag purse carryall">
+        <article class="product-card" data-id="tote" data-category="fashion" data-name="weekend tote bag" data-search="weekend tote bag purse carryall neutral" data-price="1299">
           <div class="product-image-wrap">
             <img src="https://images.unsplash.com/photo-1548036328-c9fa89d128fa?auto=format&fit=crop&w=800&q=85" alt="Neutral-colored tote bag" loading="lazy">
           </div>
           <div class="product-info">
-            <p class="product-category">Fashion</p>
+            <p class="product-category">Style</p>
             <h3>Weekend Tote Bag</h3>
-            <div class="product-bottom">
+            <div class="product-meta">
               <span class="price">₹1,299</span>
               <span class="rating" aria-label="Rated 4.9 out of 5">★ 4.9</span>
             </div>
-            <button class="add-button" type="button">Add to cart</button>
+            <button class="add-button" type="button">Add to bag <span aria-hidden="true">+</span></button>
           </div>
         </article>
 
-        <article class="product-card" data-category="home" data-name="soft glow desk lamp" data-search="soft glow desk lamp lighting">
+        <article class="product-card" data-id="lamp" data-category="home" data-name="soft glow desk lamp" data-search="soft glow desk lamp lighting room" data-price="1599">
           <div class="product-image-wrap">
             <img src="https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&w=800&q=85" alt="Modern desk lamp in a cozy room" loading="lazy">
           </div>
           <div class="product-info">
             <p class="product-category">Home</p>
             <h3>Soft Glow Desk Lamp</h3>
-            <div class="product-bottom">
+            <div class="product-meta">
               <span class="price">₹1,599</span>
               <span class="rating" aria-label="Rated 4.5 out of 5">★ 4.5</span>
             </div>
-            <button class="add-button" type="button">Add to cart</button>
+            <button class="add-button" type="button">Add to bag <span aria-hidden="true">+</span></button>
           </div>
         </article>
 
-        <article class="product-card" data-category="home" data-name="ceramic coffee mug" data-search="ceramic coffee mug kitchen drinkware">
+        <article class="product-card" data-id="mug" data-category="home" data-name="ceramic coffee mug" data-search="ceramic coffee mug kitchen drinkware" data-price="499">
           <div class="product-image-wrap">
             <img src="https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?auto=format&fit=crop&w=800&q=85" alt="Ceramic mug on a table" loading="lazy">
           </div>
           <div class="product-info">
             <p class="product-category">Home</p>
             <h3>Ceramic Coffee Mug</h3>
-            <div class="product-bottom">
+            <div class="product-meta">
               <span class="price">₹499</span>
               <span class="rating" aria-label="Rated 4.8 out of 5">★ 4.8</span>
             </div>
-            <button class="add-button" type="button">Add to cart</button>
+            <button class="add-button" type="button">Add to bag <span aria-hidden="true">+</span></button>
           </div>
         </article>
 
-        <article class="product-card" data-category="beauty" data-name="fresh day perfume" data-search="fresh day perfume fragrance beauty">
+        <article class="product-card" data-id="perfume" data-category="beauty" data-name="fresh day perfume" data-search="fresh day perfume fragrance beauty" data-price="1799">
           <div class="product-image-wrap">
             <img src="https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&w=800&q=85" alt="Perfume bottle" loading="lazy">
-            <span class="product-badge">Popular</span>
+            <span class="product-badge badge-soft">A little treat</span>
           </div>
           <div class="product-info">
             <p class="product-category">Beauty</p>
             <h3>Fresh Day Perfume</h3>
-            <div class="product-bottom">
+            <div class="product-meta">
               <span class="price">₹1,799</span>
               <span class="rating" aria-label="Rated 4.7 out of 5">★ 4.7</span>
             </div>
-            <button class="add-button" type="button">Add to cart</button>
+            <button class="add-button" type="button">Add to bag <span aria-hidden="true">+</span></button>
           </div>
         </article>
 
-        <article class="product-card" data-category="fashion" data-name="sunny day sunglasses" data-search="sunny day sunglasses eyewear">
+        <article class="product-card" data-id="sunglasses" data-category="fashion" data-name="sunny day sunglasses" data-search="sunny day sunglasses eyewear fashion" data-price="999">
           <div class="product-image-wrap">
             <img src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=800&q=85" alt="Sunglasses on a bright background" loading="lazy">
           </div>
           <div class="product-info">
-            <p class="product-category">Fashion</p>
+            <p class="product-category">Style</p>
             <h3>Sunny Day Sunglasses</h3>
-            <div class="product-bottom">
+            <div class="product-meta">
               <span class="price">₹999</span>
               <span class="rating" aria-label="Rated 4.6 out of 5">★ 4.6</span>
             </div>
-            <button class="add-button" type="button">Add to cart</button>
+            <button class="add-button" type="button">Add to bag <span aria-hidden="true">+</span></button>
           </div>
         </article>
       </div>
 
-      <p class="empty-message" id="empty-message" hidden>
-        No products match your search. Try a different word or category.
+      <p class="empty-state" id="empty-state" hidden>
+        No products found. Try a different search or category.
       </p>
     </section>
 
-    <section class="benefits" id="why-shopeasy" aria-label="ShopEasy benefits">
-      <div>
-        <span class="benefit-icon" aria-hidden="true">↗</span>
+    <section class="promise-section" id="why-shopeasy" aria-label="ShopEasy promise">
+      <div class="promise-heading">
+        <p class="eyebrow">Shopping should feel easy</p>
+        <h2>Good picks.<br><em>No fuss.</em></h2>
+      </div>
+      <div class="promise-item">
+        <span class="promise-number">01</span>
         <h3>Easy to explore</h3>
-        <p>Find something lovely in just a few clicks.</p>
+        <p>Search and filter to find just the thing.</p>
       </div>
-      <div>
-        <span class="benefit-icon" aria-hidden="true">♡</span>
+      <div class="promise-item">
+        <span class="promise-number">02</span>
         <h3>Everyday favorites</h3>
-        <p>A hand-picked mix for home, style, and life.</p>
+        <p>A little mix of useful, lovely things.</p>
       </div>
-      <div>
-        <span class="benefit-icon" aria-hidden="true">✓</span>
+      <div class="promise-item">
+        <span class="promise-number">03</span>
         <h3>Simple shopping</h3>
-        <p>A friendly place to discover your next favorite.</p>
+        <p>Clear product details and easy choices.</p>
       </div>
     </section>
   </main>
 
   <footer class="site-footer">
     <a class="brand footer-brand" href="#">
-      <span class="brand-mark" aria-hidden="true">SE</span>
+      <span class="brand-mark" aria-hidden="true">S</span>
       <span>ShopEasy</span>
     </a>
     <p>Good finds for everyday life.</p>
-    <p class="copyright">© 2026 ShopEasy. Sample storefront project.</p>
+    <span class="footer-note">Sample storefront project · 2026</span>
   </footer>
+
+  <dialog class="cart-drawer" id="cart-dialog" aria-labelledby="cart-title">
+    <div class="cart-drawer-inner">
+      <div class="cart-header">
+        <div>
+          <p class="eyebrow">Your picks</p>
+          <h2 id="cart-title">Your bag <span id="cart-heading-count">(0)</span></h2>
+        </div>
+        <button class="close-cart" id="close-cart" type="button" aria-label="Close shopping bag">×</button>
+      </div>
+
+      <p class="cart-empty" id="cart-empty">Your bag is waiting for something lovely.</p>
+      <div class="cart-items" id="cart-items"></div>
+
+      <div class="cart-footer" id="cart-footer" hidden>
+        <div class="subtotal-row">
+          <span>Subtotal</span>
+          <strong id="cart-subtotal">₹0</strong>
+        </div>
+        <p class="cart-note">Sample cart only. Checkout is not available yet.</p>
+        <button class="continue-button" id="continue-shopping" type="button">Keep browsing</button>
+      </div>
+    </div>
+  </dialog>
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 </body>
