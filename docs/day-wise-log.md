@@ -236,3 +236,31 @@ Logout and pages that use the signed-in customer session have not been implement
 ### Next Steps
 
 - Add logout and display the signed-in customer’s status.
+## Day 11: Login Status and Sign Out
+
+**Date:** 25 November 2026
+
+### Objective
+
+Show whether a customer is signed in and let them end their session.
+
+### Work Completed
+
+1. Created the Java `/api/session` endpoint to check login status.
+2. Added sign-out behavior that ends the customer session.
+3. Updated the login page to show the signed-in customer’s name.
+4. Added a Sign out button that returns the page to the login form.
+5. Built and deployed the application to Tomcat.
+6. Tested signing in and signing out successfully.
+
+### Outcome
+
+The login page shows the signed-in customer and allows them to sign out.
+
+### Scope
+
+Customer-only pages and order history have not been implemented yet.
+
+### Next Steps
+
+- Begin planning the checkout and order features.
