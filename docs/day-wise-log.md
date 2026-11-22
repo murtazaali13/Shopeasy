@@ -127,3 +127,30 @@ The ShopEasy page displays the four products returned by the Java backend from M
 ### Next Steps
 
 Replace the original sample catalog with database products and connect those products to the cart.
+## Day 7: Add Database Products to the Shopping Cart
+
+**Date:** 23 November 2026
+
+### Objective
+
+Allow products loaded from MySQL to be added to the existing shopping cart.
+
+### Work Completed
+
+1. Added an “Add to cart” button to each database product card.
+2. Connected the buttons to the existing cart functionality.
+3. Included each product’s database ID, name, and price so the cart can display it.
+4. Rebuilt and redeployed the application to Tomcat.
+5. Confirmed in the browser that a database product can be added to the cart.
+
+### Outcome
+
+Products loaded from MySQL can now be added to the website’s client-side shopping cart.
+
+### Scope
+
+The cart still runs in the browser. Cart saving between visits, checkout, and order storage have not been implemented.
+
+### Next Steps
+
+- Plan the next shopping cart or checkout feature.

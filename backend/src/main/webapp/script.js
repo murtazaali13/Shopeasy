@@ -291,10 +291,23 @@ async function loadDatabaseProducts() {
 
     const products = await response.json();
     productList.replaceChildren();
+    const originalImages = Array.from(
+  document.querySelectorAll("#product-grid .product-card img")
+);
 
     products.forEach((product) => {
       const card = document.createElement("article");
-      card.className = "database-product-card";
+      card.className = "database-product-card product-card";
+card.dataset.id = String(product.id);
+card.dataset.price = String(product.price);
+
+const image = document.createElement("img");
+image.src =
+  originalImages[Number(product.id) - 1]?.src ||
+  originalImages[0]?.src ||
+  "";
+image.alt = product.name;
+image.loading = "lazy";
 
       const category = document.createElement("p");
       category.className = "database-product-category";
@@ -317,8 +330,13 @@ async function loadDatabaseProducts() {
       const stock = document.createElement("p");
       stock.className = "database-product-stock";
       stock.textContent = `In stock: ${product.stockQuantity}`;
+      const addButton = document.createElement("button");
+addButton.type = "button";
+addButton.className = "add-button";
+addButton.textContent = "Add to cart";
+addButton.addEventListener("click", () => addProductToCart(addButton));
 
-      card.append(category, name, description, price, stock);
+      card.append(image, category, name, description, price, stock, addButton);
       productList.append(card);
     });
 
