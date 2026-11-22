@@ -104,3 +104,26 @@ The ShopEasy backend can read product information from the MySQL database and re
 ## Next Steps
 
 Connect the homepage to the products API so its product cards use the database data.
+## Day 6: Display Products from MySQL
+
+**Project:** ShopEasy — Online Shopping Website  
+**Date:** 22 November 2026
+
+### Objective
+
+Show product information from the MySQL database on the ShopEasy website.
+
+### Work Completed
+
+1. Placed copies of the homepage files in the Java web application so Tomcat serves the page and API.
+2. Added a “Products from the database” section to the homepage.
+3. Used JavaScript to request products from `/api/products`.
+4. Displayed the product name, category, description, price, and stock quantity returned by the API.
+
+### Outcome
+
+The ShopEasy page displays the four products returned by the Java backend from MySQL.
+
+### Next Steps
+
+Replace the original sample catalog with database products and connect those products to the cart.
