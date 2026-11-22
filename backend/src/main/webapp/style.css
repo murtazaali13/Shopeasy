@@ -1406,3 +1406,12 @@ input:focus-visible {
   color: #687064;
   font-size: 12px;
 }
+
+.database-product-card.product-card img {
+  display: block;
+  width: 100%;
+  height: 220px;
+  object-fit: contain;
+  object-position: center;
+  background-color: #f4f4f0;
+}

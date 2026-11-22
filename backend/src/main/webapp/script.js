@@ -51,7 +51,7 @@ function filterProducts() {
   const searchTerm = searchInput.value.trim().toLowerCase();
   let visibleProducts = 0;
 
-  productCards.forEach((card) => {
+  document.querySelectorAll(".product-card").forEach((card) => {
     const productCategory = card.dataset.category;
     const searchableText =
       `${card.dataset.name} ${card.dataset.search}`.toLowerCase();
@@ -294,17 +294,27 @@ async function loadDatabaseProducts() {
     const originalImages = Array.from(
   document.querySelectorAll("#product-grid .product-card img")
 );
-
+const databaseProductImages = {
+  1: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80",
+  2: "https://images.unsplash.com/photo-1602143407151-7111542de6e8?auto=format&fit=crop&w=800&q=80",
+  3: "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&w=800&q=80",
+  4: "https://images.unsplash.com/photo-1591561954557-26941169b49e?auto=format&fit=crop&w=800&q=80"
+};
     products.forEach((product) => {
       const card = document.createElement("article");
       card.className = "database-product-card product-card";
 card.dataset.id = String(product.id);
 card.dataset.price = String(product.price);
+const categoryForFilter = String(product.category).trim().toLowerCase();
+card.dataset.category =
+  categoryForFilter === "tech" ? "electronics" : categoryForFilter;
+card.dataset.name = String(product.name).toLowerCase();
+card.dataset.search =
+  `${product.name} ${product.category} ${product.description}`.toLowerCase();
 
 const image = document.createElement("img");
 image.src =
-  originalImages[Number(product.id) - 1]?.src ||
-  originalImages[0]?.src ||
+  image.src = databaseProductImages[Number(product.id)] || "";
   "";
 image.alt = product.name;
 image.loading = "lazy";
@@ -340,6 +350,7 @@ addButton.addEventListener("click", () => addProductToCart(addButton));
       productList.append(card);
     });
 
+filterProducts();
     statusMessage.textContent = `Loaded ${products.length} products from MySQL.`;
   } catch (error) {
     statusMessage.textContent =

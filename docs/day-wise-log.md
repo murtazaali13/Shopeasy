@@ -154,3 +154,27 @@ The cart still runs in the browser. Cart saving between visits, checkout, and or
 ### Next Steps
 
 - Plan the next shopping cart or checkout feature.
+## Day 8: Search, Filter, and Display Database Products
+
+**Date:** 24 November 2026
+
+### Objective
+
+Make products loaded from MySQL work with the existing search and category filters, and display matching product pictures.
+
+### Work Completed
+
+1. Added category, name, and search information to database product cards.
+2. Updated the filters to include products loaded from MySQL.
+3. Applied the current filters after database products finish loading.
+4. Assigned product pictures to the four sample database products.
+5. Adjusted picture display so the full product images fit inside the cards.
+6. Checked the Daily Sip Bottle search, Wellness filter, and product pictures.
+
+### Outcome
+
+Products loaded from MySQL can be searched and filtered by category, and their pictures display correctly.
+
+### Next Steps
+
+- Begin planning user registration and login.
