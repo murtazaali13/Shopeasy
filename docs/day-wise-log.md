@@ -80,3 +80,27 @@ This is a frontend demonstration with sample products. A backend, user accounts,
 - Improved the product card layout and spacing for desktop and smaller screens.
 - Kept the existing search, category filters, and add-to-cart counter.
 - The page uses sample products and runs in the browser. Backend, login, and checkout features are not implemented.
+# Day 5: Java Backend and MySQL Product API
+
+**Project:** ShopEasy — Online Shopping Website
+**Date:** 22 November 2026
+
+## Objective
+
+Create a Java backend endpoint that reads ShopEasy products from MySQL.
+
+## Work Completed
+
+1. Created a Java web application using Maven and Jakarta Servlets.
+2. Connected Java to MySQL using MySQL Connector/J.
+3. Created a `GET /api/products` endpoint.
+4. Deployed the application to Apache Tomcat.
+5. Opened the API in a browser and confirmed it returned four products as JSON.
+
+## Outcome
+
+The ShopEasy backend can read product information from the MySQL database and return it through the API.
+
+## Next Steps
+
+Connect the homepage to the products API so its product cards use the database data.
