@@ -360,3 +360,72 @@ filterProducts();
 }
 
 loadDatabaseProducts();
+
+const checkoutForm = document.querySelector("#checkout-form");
+
+if (checkoutForm) {
+  checkoutForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const checkoutMessage = document.querySelector("#checkout-message");
+    const submitButton = checkoutForm.querySelector(
+      'button[type="submit"]'
+    );
+
+    const formData = new FormData(checkoutForm);
+    const items = Array.from(cart.values(), (item) => ({
+      id: Number(item.id),
+      quantity: Number(item.quantity)
+    }));
+
+    if (items.length === 0) {
+      checkoutMessage.textContent = "Your cart is empty.";
+      return;
+    }
+
+    if (items.some((item) => !Number.isInteger(item.id) || item.id <= 0)) {
+      checkoutMessage.textContent =
+        "Only products loaded from MySQL can be ordered right now. Remove other products from your bag.";
+      return;
+    }
+
+    const orderDetails = {
+      shippingAddress: formData.get("shippingAddress"),
+      phoneNumber: formData.get("phoneNumber"),
+      items
+    };
+
+    submitButton.disabled = true;
+    checkoutMessage.textContent = "Placing your order...";
+
+    try {
+      const response = await fetch("./api/checkout", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(orderDetails)
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        checkoutMessage.textContent =
+          result.message || "Could not place the order.";
+        return;
+      }
+
+      cart.clear();
+      renderCart();
+      window.alert(
+        `Order #${result.orderId} placed successfully. Total: ₹${result.total}`
+      );
+    } catch (error) {
+      console.error("Checkout request failed:", error);
+      checkoutMessage.textContent =
+        "Could not contact ShopEasy. Check that Tomcat is running, then try again.";
+    } finally {
+      submitButton.disabled = false;
+    }
+  });
+}

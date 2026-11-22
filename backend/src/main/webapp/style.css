@@ -1415,3 +1415,49 @@ input:focus-visible {
   object-position: center;
   background-color: #f4f4f0;
 }
+
+#checkout-form {
+  display: grid;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+#checkout-form label {
+  display: block;
+  margin-top: 8px;
+  font-weight: 600;
+}
+
+#checkout-form input,
+#checkout-form textarea {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #d8d7e5;
+  border-radius: 8px;
+  font: inherit;
+}
+
+#checkout-form textarea {
+  min-height: 78px;
+  resize: vertical;
+}
+
+#checkout-form .checkout-button {
+  width: 100%;
+  margin-top: 8px;
+  padding: 12px;
+  border: 0;
+  border-radius: 10px;
+  color: white;
+  background: #3526c8;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+#checkout-message {
+  min-height: 1.2em;
+  margin: 0;
+}

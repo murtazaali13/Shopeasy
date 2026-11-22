@@ -264,3 +264,31 @@ Customer-only pages and order history have not been implemented yet.
 ### Next Steps
 
 - Begin planning the checkout and order features.
+## Day 12: Checkout and Order Saving
+
+**Date:** 25 November 2026
+
+### Objective
+
+Let a signed-in customer place a Cash on Delivery order and save it in MySQL.
+
+### Work Completed
+
+1. Created the `orders` and `order_items` MySQL tables.
+2. Created the Java `/api/checkout` endpoint, which requires a signed-in customer.
+3. Added checkout fields for a delivery address and phone number.
+4. Checked product prices and stock using MySQL data.
+5. Saved the order and its items, and updated product stock.
+6. Tested checkout and received a successful order confirmation.
+
+### Outcome
+
+A signed-in customer can place an order using products loaded from MySQL.
+
+### Scope
+
+Checkout is limited to database products. Order history and real online payment processing have not been implemented.
+
+### Next Steps
+
+- Add a page where customers can view their order history.

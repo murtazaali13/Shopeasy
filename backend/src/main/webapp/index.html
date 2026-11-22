@@ -305,8 +305,37 @@
           <span>Subtotal</span>
           <strong id="cart-subtotal">₹0</strong>
         </div>
-        <p class="cart-note">Sample cart only. Checkout is not available yet.</p>
-        <button class="continue-button" id="continue-shopping" type="button">Keep browsing</button>
+        
+        <form id="checkout-form">
+  <label for="shipping-address">Delivery address</label>
+  <textarea
+    id="shipping-address"
+    name="shippingAddress"
+    rows="3"
+    maxlength="500"
+    required
+  ></textarea>
+
+  <label for="phone-number">Phone number</label>
+  <input
+    id="phone-number"
+    name="phoneNumber"
+    type="tel"
+    maxlength="30"
+    required
+  >
+
+  <button type="submit" class="checkout-button">
+    Place order (Cash on Delivery)
+  </button>
+
+  <p id="checkout-message" role="status" aria-live="polite"></p>
+</form>
+
+<button class="continue-button" id="continue-shopping" type="button">
+  Keep browsing
+</button>
+      
       </div>
     </div>
   </dialog>
