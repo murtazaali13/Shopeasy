@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create a ShopEasy Account</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 20px;
+      font-family: Arial, sans-serif;
+      color: #24233a;
+      background: #f6f5fb;
+    }
+
+    .register-card {
+      width: min(100%, 420px);
+      padding: 32px;
+      border-radius: 18px;
+      background: white;
+      box-shadow: 0 12px 35px rgba(30, 25, 80, 0.12);
+    }
+
+    h1 {
+      margin-top: 0;
+      color: #3526c8;
+    }
+
+    label {
+      display: block;
+      margin: 16px 0 6px;
+      font-weight: bold;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #d8d7e5;
+      border-radius: 9px;
+      font: inherit;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 22px;
+      padding: 13px;
+      border: 0;
+      border-radius: 9px;
+      color: white;
+      background: #3526c8;
+      font: inherit;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:disabled {
+      opacity: 0.6;
+      cursor: wait;
+    }
+
+    #registration-message {
+      min-height: 22px;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-top: 18px;
+      color: #3526c8;
+    }
+  </style>
+
+  <script src="register.js" defer></script>
+</head>
+<body>
+  <main class="register-card">
+    <h1>Create an account</h1>
+    <p>Join ShopEasy to get started.</p>
+
+    <p id="registration-message" aria-live="polite"></p>
+
+    <form id="registration-form">
+      <label for="full-name">Full name</label>
+      <input
+        id="full-name"
+        name="fullName"
+        type="text"
+        maxlength="120"
+        autocomplete="name"
+        required
+      >
+
+      <label for="email">Email address</label>
+      <input
+        id="email"
+        name="email"
+        type="email"
+        maxlength="255"
+        autocomplete="email"
+        required
+      >
+
+      <label for="password">Password (at least 8 characters)</label>
+      <input
+        id="password"
+        name="password"
+        type="password"
+        minlength="8"
+        maxlength="128"
+        autocomplete="new-password"
+        required
+      >
+
+      <button type="submit">Create account</button>
+    </form>
+
+    <a class="back-link" href="./">Back to ShopEasy</a>
+  </main>
+</body>
+</html>

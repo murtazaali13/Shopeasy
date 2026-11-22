@@ -178,3 +178,32 @@ Products loaded from MySQL can be searched and filtered by category, and their p
 ### Next Steps
 
 - Begin planning user registration and login.
+## Day 9: User Registration
+
+**Date:** 25 November 2026
+
+### Objective
+
+Create a registration page that saves new customer accounts in MySQL.
+
+### Work Completed
+
+1. Created a `users` table with a unique email address for each account.
+2. Created a Java registration endpoint at `/api/register`.
+3. Added name, email, and password validation.
+4. Stored passwords as salted PBKDF2 hashes.
+5. Created the registration page and connected it to the Java endpoint.
+6. Built and deployed the application to Tomcat.
+7. Tested registration and confirmed the page reports success.
+
+### Outcome
+
+A customer can register, and the account details are saved in MySQL.
+
+### Scope
+
+Login and customer order history have not been implemented yet.
+
+### Next Steps
+
+- Add customer login.
