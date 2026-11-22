@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign in to ShopEasy</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 20px;
+      font-family: Arial, sans-serif;
+      color: #24233a;
+      background: #f6f5fb;
+    }
+
+    .login-card {
+      width: min(100%, 420px);
+      padding: 32px;
+      border-radius: 18px;
+      background: white;
+      box-shadow: 0 12px 35px rgba(30, 25, 80, 0.12);
+    }
+
+    h1 {
+      margin-top: 0;
+      color: #3526c8;
+    }
+
+    label {
+      display: block;
+      margin: 16px 0 6px;
+      font-weight: bold;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #d8d7e5;
+      border-radius: 9px;
+      font: inherit;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 22px;
+      padding: 13px;
+      border: 0;
+      border-radius: 9px;
+      color: white;
+      background: #3526c8;
+      font: inherit;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:disabled {
+      opacity: 0.6;
+      cursor: wait;
+    }
+
+    #login-message {
+      min-height: 22px;
+    }
+
+    .account-link {
+      display: inline-block;
+      margin-top: 18px;
+      color: #3526c8;
+    }
+  </style>
+
+  <script src="login.js" defer></script>
+</head>
+<body>
+  <main class="login-card">
+    <h1>Sign in</h1>
+    <p>Welcome back to ShopEasy.</p>
+
+    <p id="login-message" aria-live="polite"></p>
+
+    <form id="login-form">
+      <label for="email">Email address</label>
+      <input
+        id="email"
+        name="email"
+        type="email"
+        autocomplete="email"
+        required
+      >
+
+      <label for="password">Password</label>
+      <input
+        id="password"
+        name="password"
+        type="password"
+        autocomplete="current-password"
+        required
+      >
+
+      <button type="submit">Sign in</button>
+    </form>
+
+    <a class="account-link" href="register.html">Create a new account</a>
+    <br>
+    <a class="account-link" href="./">Back to ShopEasy</a>
+  </main>
+</body>
+</html>

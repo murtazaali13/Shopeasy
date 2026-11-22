@@ -207,3 +207,32 @@ Login and customer order history have not been implemented yet.
 ### Next Steps
 
 - Add customer login.
+## Day 10: Customer Login
+
+**Date:** 25 November 2026
+
+### Objective
+
+Allow registered customers to sign in to ShopEasy.
+
+### Work Completed
+
+1. Created a login page with email and password fields.
+2. Connected the page to the Java `/api/login` endpoint.
+3. Checked login details against the account stored in MySQL.
+4. Verified the submitted password against its stored PBKDF2 hash.
+5. Started a customer session after a successful login.
+6. Built and deployed the application to Tomcat.
+7. Tested login with the registered account and received a welcome message.
+
+### Outcome
+
+A registered customer can sign in to ShopEasy.
+
+### Scope
+
+Logout and pages that use the signed-in customer session have not been implemented yet.
+
+### Next Steps
+
+- Add logout and display the signed-in customer’s status.
