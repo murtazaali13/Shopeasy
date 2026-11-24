@@ -385,3 +385,21 @@ The admin can view orders. Changing an order’s status has not been implemented
 
 ### Next Steps
 - Add controls for the admin to update order status.
+## Day 17: Admin Order Status Updates
+
+**Date:** 25 November 2026
+
+### Objective
+Allow the administrator to update customer order statuses.
+
+### Work Completed
+1. Added an admin-only backend endpoint to update an order’s status.
+2. Added a status selector to each order in the admin dashboard.
+3. Allowed these statuses: PLACED, PROCESSING, SHIPPED, DELIVERED, and CANCELLED.
+4. Updated an order from PLACED to PROCESSING and confirmed the change appeared.
+
+### Scope
+Customer notifications about status changes have not been implemented yet.
+
+### Next Steps
+- Show the products and quantities included in each admin order.

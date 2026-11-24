@@ -245,6 +245,14 @@ async function loadAdminOrders() {
 
     statusMessage.textContent = `Loaded ${orders.length} order(s).`;
 
+    const allowedStatuses = [
+      "PLACED",
+      "PROCESSING",
+      "SHIPPED",
+      "DELIVERED",
+      "CANCELLED"
+    ];
+
     orders.forEach((order) => {
       const card = document.createElement("article");
       card.style.border = "1px solid #ddd";
@@ -261,7 +269,6 @@ async function loadAdminOrders() {
         ["Delivery address", order.shippingAddress],
         ["Phone", order.phoneNumber],
         ["Payment", order.paymentMethod],
-        ["Status", order.status],
         ["Total", `₹${Number(order.total).toFixed(2)}`]
       ];
 
@@ -271,6 +278,67 @@ async function loadAdminOrders() {
         card.appendChild(line);
       });
 
+      const currentStatus = document.createElement("p");
+      currentStatus.textContent = `Current status: ${order.status}`;
+      card.appendChild(currentStatus);
+
+      const controls = document.createElement("p");
+      const label = document.createElement("label");
+      const select = document.createElement("select");
+      const selectId = `order-status-${order.id}`;
+
+      label.htmlFor = selectId;
+      label.textContent = "Change status: ";
+      select.id = selectId;
+      select.setAttribute("aria-label", `New status for order ${order.id}`);
+
+      allowedStatuses.forEach((status) => {
+        const option = document.createElement("option");
+        option.value = status;
+        option.textContent = status;
+        option.selected = status === order.status;
+        select.appendChild(option);
+      });
+
+      const updateButton = document.createElement("button");
+      updateButton.type = "button";
+      updateButton.textContent = "Update status";
+      updateButton.disabled = true;
+
+      select.addEventListener("change", () => {
+        updateButton.disabled = select.value === order.status;
+      });
+
+      updateButton.addEventListener("click", async () => {
+        const newStatus = select.value;
+        updateButton.disabled = true;
+        statusMessage.textContent = `Updating order #${order.id}...`;
+
+        try {
+          const updateUrl =
+            `./api/admin/orders?id=${encodeURIComponent(order.id)}` +
+            `&status=${encodeURIComponent(newStatus)}`;
+
+          const updateResponse = await fetch(updateUrl, { method: "PUT" });
+          const result = await updateResponse.json();
+
+          if (!updateResponse.ok) {
+            throw new Error(result.error || "Could not update the order.");
+          }
+
+          await loadAdminOrders();
+          statusMessage.textContent =
+            `Order #${order.id} status changed to ${newStatus}.`;
+        } catch (error) {
+          console.error("Order status update error:", error);
+          statusMessage.textContent =
+            "Could not update the order status. Please try again.";
+          updateButton.disabled = select.value === order.status;
+        }
+      });
+
+      controls.append(label, select, updateButton);
+      card.appendChild(controls);
       orderList.appendChild(card);
     });
   } catch (error) {

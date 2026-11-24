@@ -68,4 +68,88 @@ public class AdminOrdersServlet extends HttpServlet {
             mapper.writeValue(response.getWriter(), message);
         }
     }
+        @Override
+    protected void doPut(HttpServletRequest request, HttpServletResponse response)
+            throws IOException {
+
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+
+        String idText = request.getParameter("id");
+        String status = request.getParameter("status");
+
+        if (idText == null || status == null) {
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            mapper.writeValue(
+                response.getWriter(),
+                mapper.createObjectNode().put("error", "Order ID and status are required")
+            );
+            return;
+        }
+
+        status = status.trim().toUpperCase(java.util.Locale.ROOT);
+
+        boolean validStatus =
+                status.equals("PLACED")
+                || status.equals("PROCESSING")
+                || status.equals("SHIPPED")
+                || status.equals("DELIVERED")
+                || status.equals("CANCELLED");
+
+        if (!validStatus) {
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            mapper.writeValue(
+                response.getWriter(),
+                mapper.createObjectNode().put("error", "Invalid order status")
+            );
+            return;
+        }
+
+        long orderId;
+
+        try {
+            orderId = Long.parseLong(idText);
+        } catch (NumberFormatException error) {
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            mapper.writeValue(
+                response.getWriter(),
+                mapper.createObjectNode().put("error", "Invalid order ID")
+            );
+            return;
+        }
+
+        String sql = "UPDATE orders SET status = ? WHERE id = ?";
+
+        try (
+            Connection connection = DatabaseConnection.getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql)
+        ) {
+            statement.setString(1, status);
+            statement.setLong(2, orderId);
+
+            int updatedRows = statement.executeUpdate();
+
+            if (updatedRows == 0) {
+                response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+                mapper.writeValue(
+                    response.getWriter(),
+                    mapper.createObjectNode().put("error", "Order not found")
+                );
+                return;
+            }
+
+            mapper.writeValue(
+                response.getWriter(),
+                mapper.createObjectNode().put("message", "Order status updated")
+            );
+
+        } catch (SQLException error) {
+            log("Could not update order status", error);
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            mapper.writeValue(
+                response.getWriter(),
+                mapper.createObjectNode().put("error", "Could not update order status")
+            );
+        }
+    }
 }
