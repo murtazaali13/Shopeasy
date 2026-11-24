@@ -292,3 +292,31 @@ Checkout is limited to database products. Order history and real online payment 
 ### Next Steps
 
 - Add a page where customers can view their order history.
+
+## Day 13: Customer Order History
+
+**Date:** 25 November 2026
+
+### Objective
+
+Allow a signed-in customer to view orders placed from their account.
+
+### Work Completed
+
+1. Created the Java `/api/orders` endpoint.
+2. Limited the endpoint to orders belonging to the signed-in customer.
+3. Created an order history page and connected it to the endpoint.
+4. Displayed each order’s number, status, date, payment method, items, and total.
+5. Tested the page and confirmed the placed order appeared.
+
+### Outcome
+
+A signed-in customer can view their order history.
+
+### Scope
+
+The administrator dashboard for managing products and orders has not been implemented.
+
+### Next Steps
+
+- Begin the admin dashboard.

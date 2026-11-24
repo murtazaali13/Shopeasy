@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Orders | ShopEasy</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      padding: 32px 18px;
+      font-family: Arial, sans-serif;
+      color: #24233a;
+      background: #f6f5fb;
+    }
+
+    main {
+      width: min(100%, 850px);
+      margin: 0 auto;
+    }
+
+    .page-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    h1 {
+      margin: 0;
+      color: #3526c8;
+    }
+
+    a {
+      color: #3526c8;
+    }
+
+    #orders-message {
+      min-height: 24px;
+    }
+
+    .order-card {
+      margin: 16px 0;
+      padding: 22px;
+      border: 1px solid #e2e0ed;
+      border-radius: 14px;
+      background: white;
+      box-shadow: 0 8px 24px rgba(30, 25, 80, 0.06);
+    }
+
+    .order-card h2 {
+      margin: 0 0 8px;
+    }
+
+    .order-details {
+      color: #5d5b6d;
+    }
+
+    .order-items {
+      padding-left: 20px;
+      line-height: 1.8;
+    }
+
+    .order-total {
+      margin-bottom: 0;
+      font-size: 1.1rem;
+      font-weight: bold;
+    }
+  </style>
+
+  <script src="orders.js" defer></script>
+</head>
+<body>
+  <main>
+    <header class="page-header">
+      <div>
+        <h1>My orders</h1>
+        <p>See the orders placed from your ShopEasy account.</p>
+      </div>
+
+      <a href="./">Back to ShopEasy</a>
+    </header>
+
+    <p id="orders-message" role="status" aria-live="polite">
+      Loading your orders...
+    </p>
+
+    <section id="orders-list" aria-label="Order history"></section>
+  </main>
+</body>
+</html>
