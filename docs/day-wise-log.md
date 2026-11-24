@@ -403,3 +403,20 @@ Customer notifications about status changes have not been implemented yet.
 
 ### Next Steps
 - Show the products and quantities included in each admin order.
+## Day 18: Final Admin Order Details
+
+**Date:** 25 November 2026
+
+### Objective
+Complete the admin order view by showing the products included in each order.
+
+### Work Completed
+1. Added product names, quantities, and unit prices to the admin orders data.
+2. Displayed each order’s items in the admin dashboard.
+3. Built and deployed the update, then confirmed the order details appeared.
+
+### Project Outcome
+ShopEasy now demonstrates product browsing, customer accounts, a shopping cart, Cash on Delivery checkout, customer order history, and admin product and order management.
+
+### Future Enhancements
+Online payments, email notifications, password recovery, and public hosting remain optional additions.

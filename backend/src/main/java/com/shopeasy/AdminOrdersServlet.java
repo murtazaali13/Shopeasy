@@ -36,7 +36,11 @@ public class AdminOrdersServlet extends HttpServlet {
             FROM orders o
             JOIN users u ON o.user_id = u.id
             ORDER BY o.id DESC
-            """;
+            """; 
+            String itemSql =
+        "SELECT product_name, quantity, unit_price " +
+        "FROM order_items WHERE order_id = ?";
+
 
         try (
             Connection connection = DatabaseConnection.getConnection();
@@ -55,6 +59,21 @@ public class AdminOrdersServlet extends HttpServlet {
                 order.put("total", results.getBigDecimal("total"));
                 order.put("paymentMethod", results.getString("payment_method"));
                 order.put("status", results.getString("status"));
+                ArrayNode items = order.putArray("items");
+
+try (PreparedStatement itemStatement =
+             connection.prepareStatement(itemSql)) {
+    itemStatement.setLong(1, results.getLong("id"));
+
+    try (ResultSet itemResults = itemStatement.executeQuery()) {
+        while (itemResults.next()) {
+            ObjectNode item = items.addObject();
+            item.put("productName", itemResults.getString("product_name"));
+            item.put("quantity", itemResults.getInt("quantity"));
+            item.put("unitPrice", itemResults.getBigDecimal("unit_price"));
+        }
+    }
+}
             }
 
             mapper.writeValue(response.getWriter(), orderList);

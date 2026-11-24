@@ -278,7 +278,20 @@ async function loadAdminOrders() {
         card.appendChild(line);
       });
 
-      const currentStatus = document.createElement("p");
+     const itemsHeading = document.createElement("h4");
+itemsHeading.textContent = "Items in this order";
+card.appendChild(itemsHeading);
+
+const itemsList = document.createElement("ul");
+
+(order.items || []).forEach((item) => {
+  const listItem = document.createElement("li");
+  listItem.textContent =
+    `${item.productName} × ${item.quantity} — ₹${Number(item.unitPrice).toFixed(2)} each`;
+  itemsList.appendChild(listItem);
+});
+
+card.appendChild(itemsList); const currentStatus = document.createElement("p");
       currentStatus.textContent = `Current status: ${order.status}`;
       card.appendChild(currentStatus);
 
