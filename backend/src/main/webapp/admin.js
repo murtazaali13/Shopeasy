@@ -38,6 +38,20 @@ function createProductRow(product) {
   status.textContent = product.active ? "Status: Active" : "Status: Inactive";
   row.append(status);
 
+  const editButton = document.createElement("button");
+  editButton.type = "button";
+  editButton.textContent = "Edit";
+  editButton.disabled = !product.active;
+  editButton.addEventListener("click", () => editProduct(product));
+  row.append(editButton);
+
+  const deactivateButton = document.createElement("button");
+  deactivateButton.type = "button";
+  deactivateButton.textContent = product.active ? "Deactivate" : "Inactive";
+  deactivateButton.disabled = !product.active;
+  deactivateButton.addEventListener("click", () => deactivateProduct(product));
+  row.append(deactivateButton);
+
   return row;
 }
 
@@ -58,7 +72,7 @@ async function loadProducts() {
         adminMessage.append(signInLink);
       }
 
-      return false;
+      return;
     }
 
     adminPanel.hidden = false;
@@ -74,15 +88,92 @@ async function loadProducts() {
         productList.append(createProductRow(product));
       }
     }
-
-    return true;
   } catch (error) {
     console.error("Could not load admin products:", error);
     adminPanel.hidden = true;
     adminMessage.textContent =
       "Could not contact ShopEasy. Check that Tomcat is running, then try again.";
-    return false;
   }
+}
+
+async function saveProductAction(method, productDetails) {
+  try {
+    const response = await fetch("./api/admin/products", {
+      method,
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(productDetails)
+    });
+
+    const result = await response.json();
+
+    if (!response.ok) {
+      adminMessage.textContent =
+        result.message || "The product could not be changed.";
+      return;
+    }
+
+    await loadProducts();
+    adminMessage.textContent = result.message;
+  } catch (error) {
+    console.error("Admin product action failed:", error);
+    adminMessage.textContent =
+      "Could not contact ShopEasy. Check that Tomcat is running, then try again.";
+  }
+}
+
+async function editProduct(product) {
+  const name = window.prompt("Product name:", product.name);
+  if (name === null) return;
+
+  const category = window.prompt("Category:", product.category);
+  if (category === null) return;
+
+  const description = window.prompt("Description:", product.description);
+  if (description === null) return;
+
+  const priceText = window.prompt("Price in rupees:", product.price);
+  if (priceText === null) return;
+
+  const stockText = window.prompt("Stock quantity:", product.stockQuantity);
+  if (stockText === null) return;
+
+  const price = Number(priceText);
+  const stockQuantity = Number(stockText);
+
+  if (
+    !name.trim() ||
+    !category.trim() ||
+    !description.trim() ||
+    !Number.isFinite(price) ||
+    price <= 0 ||
+    !Number.isInteger(stockQuantity) ||
+    stockQuantity < 0
+  ) {
+    adminMessage.textContent =
+      "Check the name, category, description, price, and stock values.";
+    return;
+  }
+
+  await saveProductAction("PUT", {
+    id: product.id,
+    name: name.trim(),
+    category: category.trim(),
+    description: description.trim(),
+    price,
+    stockQuantity
+  });
+}
+
+async function deactivateProduct(product) {
+  const confirmed = window.confirm(
+    `Deactivate "${product.name}"? It will no longer be available for sale.`
+  );
+
+  if (!confirmed) return;
+
+  await saveProductAction("DELETE", { id: product.id });
 }
 
 productForm.addEventListener("submit", async (event) => {

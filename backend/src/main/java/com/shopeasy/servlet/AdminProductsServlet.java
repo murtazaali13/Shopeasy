@@ -149,6 +149,120 @@ public class AdminProductsServlet extends HttpServlet {
         }
     }
 
+        @Override
+    protected void doPut(HttpServletRequest request, HttpServletResponse response)
+            throws IOException {
+        prepareResponse(response);
+
+        JsonNode body;
+        try {
+            body = JSON.readTree(request.getInputStream());
+        } catch (IOException exception) {
+            sendMessage(response, HttpServletResponse.SC_BAD_REQUEST,
+                    "The request was not valid JSON.");
+            return;
+        }
+
+        if (body == null || !body.isObject()) {
+            sendMessage(response, HttpServletResponse.SC_BAD_REQUEST,
+                    "Please provide product details.");
+            return;
+        }
+
+        long id = body.path("id").asLong(-1);
+        String name = body.path("name").asText("").trim();
+        String category = body.path("category").asText("").trim();
+        String description = body.path("description").asText("").trim();
+        JsonNode price = body.path("price");
+        JsonNode stock = body.path("stockQuantity");
+
+        if (id <= 0
+                || name.isEmpty() || name.length() > 120
+                || category.isEmpty() || category.length() > 80
+                || description.isEmpty() || description.length() > 500
+                || !price.isNumber() || price.decimalValue().signum() <= 0
+                || !stock.canConvertToInt() || stock.asInt() < 0) {
+            sendMessage(response, HttpServletResponse.SC_BAD_REQUEST,
+                    "Check the product name, category, description, price, and stock.");
+            return;
+        }
+
+        String sql = """
+                UPDATE products
+                SET name = ?, category = ?, description = ?,
+                    price = ?, stock_quantity = ?
+                WHERE id = ? AND active = TRUE
+                """;
+
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, name);
+            statement.setString(2, category);
+            statement.setString(3, description);
+            statement.setBigDecimal(4, price.decimalValue());
+            statement.setInt(5, stock.asInt());
+            statement.setLong(6, id);
+
+            if (statement.executeUpdate() == 0) {
+                sendMessage(response, HttpServletResponse.SC_NOT_FOUND,
+                        "Active product not found.");
+                return;
+            }
+
+            sendMessage(response, HttpServletResponse.SC_OK,
+                    "Product updated successfully.");
+        } catch (SQLException exception) {
+            log("Could not update admin product.", exception);
+            sendMessage(response, HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
+                    "Could not update the product. Please try again.");
+        }
+    }
+
+    @Override
+    protected void doDelete(HttpServletRequest request, HttpServletResponse response)
+            throws IOException {
+        prepareResponse(response);
+
+        JsonNode body;
+        try {
+            body = JSON.readTree(request.getInputStream());
+        } catch (IOException exception) {
+            sendMessage(response, HttpServletResponse.SC_BAD_REQUEST,
+                    "The request was not valid JSON.");
+            return;
+        }
+
+        long id = body == null ? -1 : body.path("id").asLong(-1);
+        if (id <= 0) {
+            sendMessage(response, HttpServletResponse.SC_BAD_REQUEST,
+                    "A valid product ID is required.");
+            return;
+        }
+
+        String sql = """
+                UPDATE products
+                SET active = FALSE
+                WHERE id = ? AND active = TRUE
+                """;
+
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setLong(1, id);
+
+            if (statement.executeUpdate() == 0) {
+                sendMessage(response, HttpServletResponse.SC_NOT_FOUND,
+                        "Active product not found.");
+                return;
+            }
+
+            sendMessage(response, HttpServletResponse.SC_OK,
+                    "Product deactivated successfully.");
+        } catch (SQLException exception) {
+            log("Could not deactivate admin product.", exception);
+            sendMessage(response, HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
+                    "Could not deactivate the product. Please try again.");
+        }
+    }
     private static void prepareResponse(HttpServletResponse response) {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");

@@ -349,3 +349,21 @@ Editing or deactivating products, managing orders, and assigning images to newly
 
 - Add product editing and deactivation.
 - Add admin order management.
+## Day 15: Admin Product Editing and Deactivation
+
+**Date:** 25 November 2026
+
+### Objective
+Allow an administrator to edit product details and deactivate products.
+
+### Work Completed
+1. Added Edit and Deactivate actions to the admin product list.
+2. Added backend support for updating product details.
+3. Added soft deactivation, which marks a product inactive while preserving its order history.
+4. Edited a product and confirmed the updated details appeared in the list.
+
+### Scope
+Product reactivation and admin order management have not been implemented yet.
+
+### Next Steps
+- Plan the next admin dashboard feature.
