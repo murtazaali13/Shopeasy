@@ -59,7 +59,7 @@ public class LoginServlet extends HttpServlet {
         }
 
         String sql = """
-                SELECT id, full_name, password_hash
+                SELECT id, full_name, password_hash, role
                 FROM users
                 WHERE email = ?
                 """;
@@ -79,6 +79,7 @@ public class LoginServlet extends HttpServlet {
                 long userId = results.getLong("id");
                 String fullName = results.getString("full_name");
                 String storedHash = results.getString("password_hash");
+                String userRole = results.getString("role");
 
                 boolean passwordMatches;
                 try {
@@ -101,6 +102,7 @@ public class LoginServlet extends HttpServlet {
                 request.changeSessionId();
                 session.setAttribute("userId", userId);
                 session.setAttribute("userName", fullName);
+                session.setAttribute("userRole", userRole);
                 session.setMaxInactiveInterval(30 * 60);
 
                 response.setStatus(HttpServletResponse.SC_OK);

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ShopEasy Admin</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      padding: 28px 18px;
+      font-family: Arial, sans-serif;
+      color: #24233a;
+      background: #f6f5fb;
+    }
+
+    main {
+      width: min(100%, 900px);
+      margin: 0 auto;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    h1 {
+      margin: 0;
+      color: #3526c8;
+    }
+
+    a {
+      color: #3526c8;
+    }
+
+    section {
+      margin: 20px 0;
+      padding: 24px;
+      border: 1px solid #e2e0ed;
+      border-radius: 14px;
+      background: white;
+    }
+
+    label {
+      display: block;
+      margin: 14px 0 6px;
+      font-weight: bold;
+    }
+
+    input,
+    select,
+    textarea {
+      display: block;
+      width: 100%;
+      padding: 11px;
+      border: 1px solid #d8d7e5;
+      border-radius: 8px;
+      font: inherit;
+    }
+
+    textarea {
+      resize: vertical;
+    }
+
+    button {
+      margin-top: 18px;
+      padding: 12px 18px;
+      border: 0;
+      border-radius: 9px;
+      color: white;
+      background: #3526c8;
+      font: inherit;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:disabled {
+      opacity: 0.6;
+      cursor: wait;
+    }
+
+    .product-row {
+      margin: 12px 0;
+      padding: 16px;
+      border: 1px solid #e2e0ed;
+      border-radius: 10px;
+    }
+
+    .product-row h3 {
+      margin: 0 0 8px;
+    }
+
+    .product-row p {
+      margin: 5px 0;
+    }
+  </style>
+
+  <script src="admin.js" defer></script>
+</head>
+<body>
+  <main>
+    <header>
+      <div>
+        <h1>ShopEasy Admin</h1>
+        <p>Manage the products in your catalogue.</p>
+      </div>
+      <a href="./">Back to ShopEasy</a>
+    </header>
+
+    <p id="admin-message" role="status" aria-live="polite">
+      Checking admin access...
+    </p>
+
+    <div id="admin-panel" hidden>
+      <section>
+        <h2>Add a product</h2>
+
+        <form id="product-form">
+          <label for="product-name">Product name</label>
+          <input
+            id="product-name"
+            name="name"
+            type="text"
+            maxlength="120"
+            required
+          >
+
+          <label for="product-category">Category</label>
+          <select id="product-category" name="category" required>
+            <option value="">Choose a category</option>
+            <option value="Tech">Tech</option>
+            <option value="Wellness">Wellness</option>
+            <option value="Home">Home</option>
+            <option value="Style">Style</option>
+          </select>
+
+          <label for="product-description">Description</label>
+          <textarea
+            id="product-description"
+            name="description"
+            rows="3"
+            maxlength="500"
+            required
+          ></textarea>
+
+          <label for="product-price">Price in rupees</label>
+          <input
+            id="product-price"
+            name="price"
+            type="number"
+            min="0.01"
+            step="0.01"
+            required
+          >
+
+          <label for="product-stock">Stock quantity</label>
+          <input
+            id="product-stock"
+            name="stockQuantity"
+            type="number"
+            min="0"
+            step="1"
+            required
+          >
+
+          <button type="submit">Add product</button>
+        </form>
+      </section>
+
+      <section>
+        <h2>Products</h2>
+        <div id="admin-product-list"></div>
+      </section>
+    </div>
+  </main>
+</body>
+</html>

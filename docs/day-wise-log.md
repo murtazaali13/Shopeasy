@@ -320,3 +320,32 @@ The administrator dashboard for managing products and orders has not been implem
 ### Next Steps
 
 - Begin the admin dashboard.
+## Day 14: Admin Product Dashboard
+
+**Date:** 25 November 2026
+
+### Objective
+
+Create an admin-only page for viewing and adding ShopEasy products.
+
+### Work Completed
+
+1. Added a customer/admin role to user accounts.
+2. Updated login to store the user role in the session.
+3. Protected admin API routes so only admins can use them.
+4. Created an admin API to list and add products.
+5. Created the admin dashboard page and product form.
+6. Tested the dashboard by adding an earbuds product.
+
+### Outcome
+
+An admin can view the catalogue and add products through the dashboard.
+
+### Scope
+
+Editing or deactivating products, managing orders, and assigning images to newly added products have not been implemented yet.
+
+### Next Steps
+
+- Add product editing and deactivation.
+- Add admin order management.
