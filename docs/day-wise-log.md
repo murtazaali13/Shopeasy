@@ -367,3 +367,21 @@ Product reactivation and admin order management have not been implemented yet.
 
 ### Next Steps
 - Plan the next admin dashboard feature.
+## Day 16: Admin Order Viewing
+
+**Date:** 25 November 2026
+
+### Objective
+Allow the administrator to view customer orders in the admin dashboard.
+
+### Work Completed
+1. Added an admin-only endpoint to retrieve customer orders.
+2. Added a Customer Orders section to the admin dashboard.
+3. Displayed order details, including the customer, delivery information, payment method, status, and total.
+4. Built and deployed the update, then confirmed that the order appeared.
+
+### Scope
+The admin can view orders. Changing an order’s status has not been implemented yet.
+
+### Next Steps
+- Add controls for the admin to update order status.

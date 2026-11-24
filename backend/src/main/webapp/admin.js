@@ -219,3 +219,65 @@ productForm.addEventListener("submit", async (event) => {
 });
 
 loadProducts();
+
+async function loadAdminOrders() {
+  const orderList = document.querySelector("#admin-orders-list");
+  const statusMessage = document.querySelector("#admin-orders-status");
+
+  if (!orderList || !statusMessage) return;
+
+  statusMessage.textContent = "Loading orders...";
+
+  try {
+    const response = await fetch("./api/admin/orders");
+
+    if (!response.ok) {
+      throw new Error(`Request failed: ${response.status}`);
+    }
+
+    const orders = await response.json();
+    orderList.replaceChildren();
+
+    if (orders.length === 0) {
+      statusMessage.textContent = "There are no orders yet.";
+      return;
+    }
+
+    statusMessage.textContent = `Loaded ${orders.length} order(s).`;
+
+    orders.forEach((order) => {
+      const card = document.createElement("article");
+      card.style.border = "1px solid #ddd";
+      card.style.borderRadius = "8px";
+      card.style.padding = "16px";
+      card.style.marginBottom = "12px";
+
+      const heading = document.createElement("h3");
+      heading.textContent = `Order #${order.id}`;
+      card.appendChild(heading);
+
+      const details = [
+        ["Customer", `${order.customerName} (${order.email})`],
+        ["Delivery address", order.shippingAddress],
+        ["Phone", order.phoneNumber],
+        ["Payment", order.paymentMethod],
+        ["Status", order.status],
+        ["Total", `₹${Number(order.total).toFixed(2)}`]
+      ];
+
+      details.forEach(([label, value]) => {
+        const line = document.createElement("p");
+        line.textContent = `${label}: ${value}`;
+        card.appendChild(line);
+      });
+
+      orderList.appendChild(card);
+    });
+  } catch (error) {
+    console.error("Admin orders error:", error);
+    statusMessage.textContent =
+      "Could not load orders. Check that you are signed in as an admin.";
+  }
+}
+
+loadAdminOrders();

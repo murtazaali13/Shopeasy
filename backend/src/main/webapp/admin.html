@@ -119,7 +119,7 @@
       Checking admin access...
     </p>
 
-    <div id="admin-panel" hidden>
+    < id="admin-panel" hidden>
       <section>
         <h2>Add a product</h2>
 
@@ -179,7 +179,14 @@
         <h2>Products</h2>
         <div id="admin-product-list"></div>
       </section>
-    </div>
-  </main>
+    
+  <section aria-labelledby="admin-orders-heading"
+         style="margin-top: 32px; padding-top: 24px; border-top: 1px solid #ddd;">
+  <h2 id="admin-orders-heading">Customer Orders</h2>
+  <p id="admin-orders-status">Orders will appear here.</p>
+  <div id="admin-orders-list"></div>
+</section>
+</div>
+</main>
 </body>
 </html>
